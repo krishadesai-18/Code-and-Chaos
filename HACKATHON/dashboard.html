@@ -1,10 +1,296 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HealthIntel | Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HealthIntel | Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #2c3e50;
+  min-height: 100vh;
+}
+
+.navbar { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  padding: 1.2rem 2rem; 
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar .logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.navbar nav ul { 
+  list-style: none; 
+  display: flex; 
+  gap: 2rem; 
+  margin: 0; 
+  padding: 0;
+}
+
+.navbar nav a { 
+  color: #fff; 
+  text-decoration: none; 
+  font-weight: 500;
+  transition: opacity 0.3s;
+}
+
+.navbar nav a:hover {
+  opacity: 0.8;
+}
+
+.container { 
+  max-width: 1200px; 
+  margin: 2rem auto; 
+  padding: 0 1rem;
+}
+
+.page-header {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.page-header-left h1 {
+  color: #1e3c72;
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.page-header-left p {
+  color: #555;
+  font-size: 1rem;
+}
+
+.page-header-right {
+  text-align: right;
+}
+
+.page-header-right .greeting {
+  font-size: 1.2rem;
+  color: #1e3c72;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.page-header-right .help-text {
+  font-size: 0.95rem;
+  color: #667eea;
+  font-weight: 500;
+}
+
+h1, h2, h3 { 
+  color: #1e3c72;
+}
+
+h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.muted { 
+  color: #555;
+}
+
+.card { 
+  background: #fff;
+  padding: 1.5rem; 
+  border-radius: 12px; 
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: box-shadow 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+}
+
+.skill-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+  gap: 1rem;
+}
+
+.skill-box { 
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 1rem; 
+  border-radius: 10px; 
+  font-weight: 500;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.skill-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+}
+
+.readiness-bar { 
+  width: 100%; 
+  height: 30px; 
+  background: #ecf0f1; 
+  border-radius: 15px; 
+  overflow: hidden; 
+  margin-top: 1rem; 
+  margin-bottom: 0.5rem;
+}
+
+#readinessFill { 
+  height: 100%; 
+  width: 0%; 
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  text-align: right; 
+  color: #fff; 
+  font-weight: bold; 
+  padding-right: 10px; 
+  line-height: 30px;
+  font-size: 0.9rem;
+}
+
+.skill-gap { 
+  margin-top: 1rem;
+}
+
+table { 
+  width: 100%; 
+  border-collapse: collapse; 
+  margin-top: 1rem;
+}
+
+th, td { 
+  border: 1px solid #ecf0f1; 
+  padding: 1rem; 
+  text-align: left;
+}
+
+th { 
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background: #f8f9fa;
+}
+
+.courses-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.course-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.course-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.course-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.4;
+}
+
+.course-provider {
+  margin-top: auto;
+  font-size: 0.85rem;
+  opacity: 0.95;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}
+
+.gap-skill-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.25);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  margin-top: 0.8rem;
+  font-weight: 500;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.gap-info {
+  color: #667eea;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: #f0f4ff;
+  border-left: 4px solid #667eea;
+  border-radius: 6px;
+}
+
+canvas {
+  max-height: 400px;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .navbar nav ul {
+    gap: 1rem;
+  }
+  
+  .page-header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .page-header-right {
+    text-align: left;
+  }
+  
+  .skill-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  
+  .courses-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .page-header-left h1 {
+    font-size: 1.8rem;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -20,28 +306,298 @@
 </header>
 
 <main class="page">
-  <div class="container">
-    <h1>Dashboard</h1>
-    <p class="muted">Overview of your skills, progress, and career alignment</p>
-
-    <!-- Welcome + Career -->
-    <div class="career-summary">
-      <h2 id="userName">Welcome, User</h2>
-      <p><strong>Career Goal:</strong> <span id="careerGoal">Select your career in profile</span></p>
+<div class="container">
+  <div class="page-header">
+    <div class="page-header-left">
+      <h1>Dashboard</h1>
+      <p>Overview of your skills, progress, and career alignment</p>
     </div>
-
-    <h2>Skills Progress</h2>
-    <div class="skill-grid">
-      <!-- JS will render skill cards here -->
-    </div>
-
-    <h2>Skills Gap</h2>
-    <div id="skillsGap" class="skill-gap">
-      <p>Select skills in your profile to see gap for your career goal.</p>
+    <div class="page-header-right">
+      <div class="greeting">Hello, <span id="userName">User</span>!</div>
+      <div class="help-text">Track your skills and find the perfect learning path</div>
     </div>
   </div>
+
+  <div class="card">
+    <h2 id="careerGoalHeader"></h2>
+    <p id="marketDemand"></p>
+    <div class="readiness-bar"><div id="readinessFill">0%</div></div>
+  </div>
+
+  <div class="card">
+    <h3>Your Skills</h3>
+    <div class="skill-grid" id="predefinedSkillGrid"></div>
+  </div>
+
+  <div class="card">
+    <h3>Additional Skills</h3>
+    <div class="skill-grid" id="customSkillGrid"></div>
+  </div>
+
+  <div class="card">
+    <h3>Skills Gap Analysis</h3>
+    <div id="skillsGap" class="skill-gap"></div>
+  </div>
+
+  <div class="card">
+    <h3>Skills Visualization</h3>
+    <canvas id="skillChart"></canvas>
+  </div>
+
+  <div class="card">
+    <h3>Recommended Courses</h3>
+    <div id="gapCoursesInfo" class="gap-info"></div>
+    <div id="recommendedCourses" class="courses-container"></div>
+  </div>
+</div>
 </main>
 
-<script src="script.js"></script>
+<script>
+function getProficiencyValue(level){
+  if(level==="Beginner") return 0.3;
+  if(level==="Intermediate") return 0.6;
+  if(level==="Advanced") return 1;
+  return 0;
+}
+
+const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+const careerGoal = currentUser.careerGoal || "No career selected";
+const allSkills = currentUser.skills || [];
+
+// Display user name
+document.getElementById('userName').textContent = currentUser.name || "User";
+
+// Separate core and custom skills
+const coreSkillNames = ["Python", "SQL", "FHIR", "HIPAA", "Machine Learning"];
+const predefinedSkills = allSkills.filter(s => coreSkillNames.includes(s.name));
+const customSkills = allSkills.filter(s => !coreSkillNames.includes(s.name));
+
+document.getElementById('careerGoalHeader').textContent = "Career Goal: " + careerGoal;
+
+const marketData = {
+  "Health Informatics Analyst": "High demand, 80k+ jobs/year",
+  "Healthcare Data Analyst": "Very high demand, 100k+ jobs/year",
+  "Medical AI Specialist": "Growing demand, 50k+ jobs/year",
+  "Hospital IT Specialist": "Moderate demand, 40k+ jobs/year"
+};
+document.getElementById('marketDemand').textContent = marketData[careerGoal] || "";
+
+function renderSkills(containerId, skills){
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+  if(skills.length === 0) {
+    container.innerHTML = "<p style='color:#7f8c8d;'>No skills added yet</p>";
+    return;
+  }
+  skills.forEach(s => {
+    const div = document.createElement('div');
+    div.className = 'skill-box';
+    div.innerHTML = `<strong>${s.name}</strong><br><small>${s.level}</small>`;
+    container.appendChild(div);
+  });
+}
+renderSkills("predefinedSkillGrid", predefinedSkills);
+renderSkills("customSkillGrid", customSkills);
+
+// Calculate readiness
+let totalProficiency = 0;
+allSkills.forEach(s => totalProficiency += getProficiencyValue(s.level));
+let readinessPercent = Math.round((totalProficiency / (allSkills.length || 1)) * 100);
+document.getElementById('readinessFill').style.width = readinessPercent + "%";
+document.getElementById('readinessFill').textContent = readinessPercent + "%";
+
+// Skills Gap & Missing Skills
+const requiredSkillsMap = {
+  "Health Informatics Analyst":["Python","SQL","FHIR"],
+  "Healthcare Data Analyst":["Python","SQL","Machine Learning"],
+  "Medical AI Specialist":["Python","Machine Learning"],
+  "Hospital IT Specialist":["SQL","HIPAA"]
+};
+const requiredSkills = requiredSkillsMap[careerGoal] || [];
+let gapHtml = "<table><tr><th>Skill</th><th>Required</th><th>Your Level</th><th>Status</th></tr>";
+let missingSkills = [];
+
+requiredSkills.forEach(skill=>{
+  let userSkill = allSkills.find(s=>s.name===skill);
+  let userLevel = userSkill ? userSkill.level : "None";
+  let status = userSkill ? "Covered" : "Missing";
+  if (!userSkill) {
+    missingSkills.push(skill);
+  }
+  gapHtml += `<tr><td><strong>${skill}</strong></td><td>Intermediate</td><td>${userLevel}</td><td><span style="color:${status === 'Covered' ? '#27ae60' : '#e74c3c'};">${status}</span></td></tr>`;
+});
+gapHtml += "</table>";
+document.getElementById('skillsGap').innerHTML = gapHtml;
+
+// Chart
+const ctx = document.getElementById('skillChart').getContext('2d');
+const labels = allSkills.map(s=>s.name);
+const dataValues = allSkills.map(s=>getProficiencyValue(s.level)*100);
+const colors = allSkills.map((s, i) => {
+  return coreSkillNames.includes(s.name) ? 'rgba(102, 126, 234, 0.7)' : 'rgba(118, 75, 162, 0.7)';
+});
+
+if(labels.length > 0) {
+  new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels:labels,
+      datasets:[{
+        label:'Proficiency %',
+        data:dataValues,
+        backgroundColor: colors,
+        borderRadius: 8,
+        borderSkipped: false
+      }]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio: true,
+      plugins:{
+        legend:{ display:false },
+        tooltip:{
+          backgroundColor: 'rgba(0,0,0,0.8)',
+          padding: 12,
+          cornerRadius: 8,
+          callbacks:{
+            label: function(context){
+              return context.label + ": " + context.raw + "%";
+            }
+          }
+        }
+      },
+      scales:{
+        x:{
+          ticks:{ color:'#2c3e50', font:{weight:'500'} }
+        },
+        y:{
+          beginAtZero:true,
+          max:100,
+          ticks:{ color:'#2c3e50', font:{weight:'500'}, stepSize:20 }
+        }
+      }
+    }
+  });
+}
+
+// Skill-to-Course Mapping
+const skillCoursesMap = {
+  "Python": {
+    title: "Python for Data Analysis",
+    url: "https://www.coursera.org/learn/python-data-analysis",
+    provider: "Coursera"
+  },
+  "SQL": {
+    title: "SQL for Data Science",
+    url: "https://www.coursera.org/learn/sql-data-science",
+    provider: "Coursera"
+  },
+  "Machine Learning": {
+    title: "Machine Learning Specialization",
+    url: "https://www.coursera.org/specializations/machine-learning-introduction",
+    provider: "Coursera"
+  },
+ "FHIR": {
+    title: "HL7 FHIR Fundamentals",
+    url: "https://www.coursera.org/projects/googlecloud-streaming-hl7-to-fhir-data-with-healthcare-api-coktd",
+    provider: "Coursera"
+  },
+  "Data Analytics": {
+    title: "Google Data Analytics Professional Certificate",
+    url: "https://www.coursera.org/professional-certificates/google-data-analytics",
+    provider: "Coursera"
+  },
+  "Healthcare Compliance": {
+    title: "HIPAA Compliance and Healthcare Security",
+    url: "https://www.coursera.org/learn/hipaa-compliance",
+    provider: "Coursera"
+  },
+  "EHR": {
+    title: "Electronic Health Records (EHR) Systems",
+    url: "https://www.coursera.org/learn/electronic-health-records",
+    provider: "Coursera"
+  },
+  "Data Visualization": {
+    title: "Data Visualization with Tableau",
+    url: "https://www.coursera.org/learn/data-visualization-tableau",
+    provider: "Coursera"
+  },
+  "Medical Imaging": {
+    title: "Medical Image Analysis",
+    url: "https://www.coursera.org/learn/medical-image-analysis",
+    provider: "Coursera"
+  },
+  "AI Ethics": {
+    title: "AI Ethics for Everyone",
+    url: "https://www.coursera.org/learn/ai-ethics-everyone",
+    provider: "Coursera"
+  },
+  "Statistics": {
+    title: "Statistics with Python",
+    url: "https://www.coursera.org/learn/statistics-python",
+    provider: "Coursera"
+  },
+  "HL7": {
+    title: "HL7 Standards for Healthcare",
+    url: "https://www.coursera.org/projects/googlecloud-ingesting-hl7v2-data-with-the-healthcare-api-xdnyz",
+    provider: "Coursera"
+},
+  "Healthcare Data": {
+    title: "Healthcare Data Analytics Specialization",
+    url: "https://www.coursera.org/specializations/healthcare-data",
+    provider: "Coursera"
+  },
+  "HIPAA": {
+  title: "Healthcare Data Security",
+  url: "https://www.coursera.org/learn/healthcare-data-security",
+  provider: "Coursera"
+}
+};
+
+function displayGapBasedCourses(missingSkillsList) {
+  const container = document.getElementById("recommendedCourses");
+  const infoElement = document.getElementById("gapCoursesInfo");
+  
+  if (missingSkillsList.length === 0) {
+    infoElement.innerHTML = "Excellent! You have all the required skills for your role. Keep learning and stay updated!";
+    container.innerHTML = "";
+    return;
+  }
+  
+  infoElement.innerHTML = `Skill Gaps Identified: <strong>${missingSkillsList.join(", ")}</strong>`;
+  
+  const courses = [];
+  missingSkillsList.forEach(skill => {
+    if (skillCoursesMap[skill]) {
+      courses.push({
+        ...skillCoursesMap[skill],
+        gapSkill: skill
+      });
+    }
+  });
+  
+  if (courses.length === 0) {
+    container.innerHTML = "<p style='color:#7f8c8d;'>No specific courses found for your skill gaps.</p>";
+    return;
+  }
+  
+  container.innerHTML = courses
+    .map(course => `
+      <a href="${course.url}" target="_blank" rel="noopener noreferrer" class="course-card">
+        <div class="course-title">${course.title}</div>
+        <div class="gap-skill-tag">${course.gapSkill}</div>
+        <div class="course-provider">Coursera</div>
+      </a>
+    `)
+    .join("");
+}
+// Logout handler
+document.getElementById('logout').addEventListener('click', (e) => {
+  e.preventDefault();
+  localStorage.removeItem('currentUser');
+  window.location.href = 'index.html';
+});
+displayGapBasedCourses(missingSkills);
+</script>
 </body>
 </html>
