@@ -4,33 +4,514 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HealthIntel | Home</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f9fa;
+    color: #2c3e50;
+    min-height: 100vh;
+  }
+  
+  .navbar { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    padding: 1.2rem 2rem; 
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  
+  .logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+  }
+  
+  .navbar nav ul { 
+    list-style: none; 
+    display: flex; 
+    gap: 2rem;
+  }
+  
+  .navbar nav a { 
+    color: #fff; 
+    text-decoration: none; 
+    font-weight: 500;
+    transition: opacity 0.3s;
+  }
+  
+  .navbar nav a:hover {
+    opacity: 0.8;
+  }
+  
+  .hero {
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  
+  .hero-text h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  
+  .hero-text span {
+    color: #667eea;
+    font-weight: 700;
+  }
+  
+  .tagline {
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.95;
+    line-height: 1.6;
+  }
+  
+  .hero-text p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    line-height: 1.8;
+  }
+  
+  .btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    padding: 1.1rem 3rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  }
+  
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  }
+  
+  .hero-image {
+    text-align: center;
+  }
+  
+  .hero-image img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  }
+  
+  .features-section {
+    max-width: 1200px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #1e3c72;
+    margin-bottom: 3rem;
+    font-weight: 700;
+  }
+  
+  .section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #667eea;
+    margin-bottom: 3rem;
+    font-weight: 500;
+  }
+  
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .feature-card {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: all 0.3s;
+    border-top: 4px solid #667eea;
+  }
+  
+  .feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  }
+  
+  .feature-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .feature-card h3 {
+    color: #1e3c72;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  .feature-card p {
+    color: #555;
+    line-height: 1.7;
+    font-size: 1rem;
+  }
+  
+  .benefits-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 4rem 2rem;
+    margin: 3rem 0;
+  }
+  
+  .benefits-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  
+  .benefits-text h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .benefits-list {
+    list-style: none;
+    margin-bottom: 2rem;
+  }
+  
+  .benefits-list li {
+    padding: 0.8rem 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .benefits-list li:before {
+    content: "✓";
+    margin-right: 1rem;
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: #fff;
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+  
+  .stat-card {
+    background: rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  
+  .stat-label {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+  
+  .cta-section {
+    background: #fff;
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  
+  .cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .cta-content h2 {
+    color: #1e3c72;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+  
+  .cta-content p {
+    color: #555;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+  
+  .btn-large {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    padding: 1.2rem 3.5rem;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  }
+  
+  .btn-large:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  }
+  
+  footer {
+    background: #1e3c72;
+    color: #fff;
+    text-align: center;
+    padding: 2.5rem;
+    margin-top: 2rem;
+  }
+  
+  footer p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .hero-content {
+      grid-template-columns: 1fr;
+      padding: 2rem 0;
+    }
+    
+    .hero-text h1 {
+      font-size: 2rem;
+    }
+    
+    .tagline {
+      font-size: 1.1rem;
+    }
+    
+    .benefits-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .section-title {
+      font-size: 2rem;
+    }
+    
+    .cta-content h2 {
+      font-size: 1.8rem;
+    }
+  }
+  </style>
 </head>
 <body>
 
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo">HealthIntel</div>
-    <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="signup.html">Signup</a></li>
-      </ul>
-    </nav>
-  </header>
+<header class="navbar">
+  <div class="logo">HealthIntel</div>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="login.html" id="loginLink">Login</a></li>
+      <li><a href="signup.html">Sign Up</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <!-- Hero Section -->
-  <main class="hero">
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
     <div class="hero-text">
-      <h1>Build your <span>Health Intelligence</span></h1>
-      <p>Track skills, improve your profile, and advance in healthcare analytics.</p>
-      <a href="signup.html" class="btn-primary big">Get Started</a>
+      <h1>Master Your <span>Healthcare Career</span></h1>
+      <p class="tagline">Intelligent skill assessment & personalized learning path</p>
+      <p>Discover what skills you need, get expert course recommendations, and track your progress toward your dream healthcare role.</p>
+      <a href="signup.html" class="btn-primary">Get Started Free</a>
     </div>
     <div class="hero-image">
-      <img src="https://via.placeholder.com/400x300" alt="Healthcare illustration">
+      <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <!-- Healthcare themed illustration -->
+        <defs>
+          <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        
+        <!-- Background Circle -->
+        <circle cx="200" cy="200" r="180" fill="url(#grad1)" opacity="0.1"/>
+        
+        <!-- Medical cross -->
+        <g>
+          <rect x="185" y="100" width="30" height="200" fill="#667eea" rx="5"/>
+          <rect x="100" y="185" width="200" height="30" fill="#667eea" rx="5"/>
+        </g>
+        
+        <!-- Heart shape -->
+        <g transform="translate(200, 150)">
+          <path d="M 0,-10 C -15,-25 -30,-25 -30,-10 C -30,0 -15,15 0,30 C 15,15 30,0 30,-10 C 30,-25 15,-25 0,-10 Z" fill="#764ba2"/>
+        </g>
+        
+        <!-- Charts/Growth indicator -->
+        <g transform="translate(120, 280)">
+          <rect x="0" y="40" width="15" height="40" fill="#667eea" opacity="0.7"/>
+          <rect x="20" y="20" width="15" height="60" fill="#667eea" opacity="0.8"/>
+          <rect x="40" y="0" width="15" height="80" fill="#667eea"/>
+          <circle cx="70" cy="20" r="8" fill="#764ba2"/>
+          <line x1="70" y1="28" x2="70" y2="60" stroke="#764ba2" stroke-width="2"/>
+        </g>
+        
+        <!-- Skill badges -->
+        <circle cx="100" cy="120" r="25" fill="rgba(102, 126, 234, 0.3)" stroke="#667eea" stroke-width="2"/>
+        <text x="100" y="125" text-anchor="middle" fill="#667eea" font-size="12" font-weight="bold">Skills</text>
+        
+        <circle cx="300" cy="140" r="25" fill="rgba(118, 75, 162, 0.3)" stroke="#764ba2" stroke-width="2"/>
+        <text x="300" y="145" text-anchor="middle" fill="#764ba2" font-size="12" font-weight="bold">Career</text>
+      </svg>
     </div>
-  </main>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+  <h2 class="section-title">Why Choose HealthIntel?</h2>
+  <p class="section-subtitle">Everything you need to advance your healthcare career</p>
+  
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Smart Skill Analysis</h3>
+      <p>Get an in-depth analysis of your current skills and identify exactly what you need to learn for your target healthcare role.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3>Personalized Recommendations</h3>
+      <p>Receive hand-picked Coursera courses tailored to your specific skill gaps and career aspirations.</p>
+    </div>
+    
+    <div class="feature-card">
+      <div class="feature-icon">📈</div>
+      <h3>Progress Tracking</h3>
+      <p>Monitor your learning journey with interactive dashboards, charts, and real-time progress tracking.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="benefits-section">
+  <div class="benefits-content">
+    <div class="benefits-text">
+      <h2>Accelerate Your Healthcare Career</h2>
+      <ul class="benefits-list">
+        <li>4 pre-defined healthcare career paths to choose from</li>
+        <li>Skill gap analysis based on industry requirements</li>
+        <li>Links to 15+ professional courses and certifications</li>
+        <li>Track your proficiency levels and readiness score</li>
+        <li>100% free to get started</li>
+        <li>No credit card required</li>
+      </ul>
+      <a href="signup.html" class="btn-primary">Start Your Journey</a>
+    </div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Career Paths</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">15+</div>
+        <div class="stat-label">Course Recommendations</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5</div>
+        <div class="stat-label">Core Healthcare Skills</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Free & No CC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="cta-content">
+    <h2>Ready to Transform Your Healthcare Career?</h2>
+    <p>Join thousands of healthcare professionals who are using HealthIntel to identify their skill gaps and advance their careers. It only takes 2 minutes to get started.</p>
+    <a href="signup.html" class="btn-large">Get Started Free Now</a>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 HealthIntel. Empowering Healthcare Careers.</p>
+  <p>Master the skills you need for your dream healthcare role.</p>
+</footer>
+
+<script>
+// Auto-logout on page load - clear any previous session
+window.addEventListener("DOMContentLoaded", () => {
+  // Clear the currentUser from localStorage to force fresh login
+  localStorage.removeItem("currentUser");
+  
+  // Update login link text if user is logged in (shouldn't be after logout)
+  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+  const loginLink = document.getElementById("loginLink");
+  
+  if (currentUser && currentUser !== "null") {
+    loginLink.textContent = "Logout";
+    loginLink.href = "#";
+    loginLink.onclick = (e) => {
+      e.preventDefault();
+      localStorage.removeItem("currentUser");
+      window.location.href = "index.html";
+    };
+  } else {
+    loginLink.textContent = "Login";
+    loginLink.href = "login.html";
+  }
+});
+</script>
 
 </body>
 </html>
