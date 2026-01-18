@@ -1,5 +1,6 @@
 from fastapi import APIRouter
-from database import profiles
+from pydantic import BaseModel
+from typing import List
 
 router = APIRouter()
 
@@ -15,18 +16,49 @@ ROLE_SKILLS = {
     ]
 }
 
-@router.get("/analyze/{user_id}/{role}")
-def analyze_skills(user_id: str, role: str):
-    user_skills = set(profiles.get(user_id, {}).get("skills", []))
-    required_skills = set(ROLE_SKILLS.get(role, []))
+LEVEL_WEIGHT = {
+    "Beginner": 0.4,
+    "Intermediate": 0.7,
+    "Advanced": 1.0
+}
 
-    matched = user_skills & required_skills
-    missing = list(required_skills - user_skills)
+class Skill(BaseModel):
+    name: str
+    level: str
 
-    readiness = int((len(matched) / len(required_skills)) * 100) if required_skills else 0
+class AnalyzeRequest(BaseModel):
+    role: str
+    skills: List[Skill]
+
+@router.post("/analyze")
+def analyze_skills(data: AnalyzeRequest):
+    required_skills = ROLE_SKILLS.get(data.role, [])
+    user_skills = {s.name: s.level for s in data.skills}
+
+    matched = [s for s in required_skills if s in user_skills]
+    missing = [s for s in required_skills if s not in user_skills]
+
+    score = sum(LEVEL_WEIGHT.get(user_skills[s], 0) for s in matched)
+    readiness = int((score / len(required_skills)) * 100) if required_skills else 0
 
     return {
-        "matched": list(matched),
+        "matched": matched,
         "missing": missing,
+        "required": required_skills,
         "readiness": readiness
+    }
+
+@router.post("/recommend-courses")
+def recommend_courses(data: AnalyzeRequest):
+    required_skills = ROLE_SKILLS.get(data.role, [])
+    user_skills = {s.name: s.level for s in data.skills}
+    
+    missing_skills = [s for s in required_skills if s not in user_skills]
+    
+    from recommendations import get_course_recommendations
+    courses = get_course_recommendations(missing_skills, data.role)
+    
+    return {
+        "missing_skills": missing_skills,
+        "recommended_courses": courses
     }
