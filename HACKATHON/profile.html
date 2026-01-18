@@ -1,10 +1,327 @@
-<!DOCTYPE html>
+]<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HealthIntel | Build Skills</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HealthIntel | Build Skills</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #2c3e50;
+  min-height: 100vh;
+}
+
+.navbar { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  padding: 1.2rem 2rem; 
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar .logo {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.navbar nav ul { 
+  list-style: none; 
+  display: flex; 
+  gap: 2rem;
+}
+
+.navbar nav a { 
+  color: #fff; 
+  text-decoration: none; 
+  font-weight: 500;
+  transition: opacity 0.3s;
+}
+
+.navbar nav a:hover {
+  opacity: 0.8;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.page-header {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.page-header h1 {
+  color: #1e3c72;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.page-header p {
+  color: #7f8c8d;
+}
+
+h2, h3 {
+  color: #1e3c72;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.skill-box {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 1.5rem;
+  border-radius: 10px;
+  transition: all 0.3s;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.skill-box:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+}
+
+.skill-box label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+}
+
+.skill-box input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.skill-box select {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.skill-box select option {
+  color: #2c3e50;
+}
+
+.badge {
+  background: rgba(255,255,255,0.3);
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-left: 0.5rem;
+}
+
+.career-section {
+  margin-bottom: 2rem;
+}
+
+.career-desc {
+  color: #7f8c8d;
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+#careerSelect {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  font-family: inherit;
+  width: 100%;
+  max-width: 400px;
+  transition: border-color 0.3s;
+}
+
+#careerSelect:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  padding: 0.9rem 2rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+  background: #27ae60;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+  margin-top: 0.8rem;
+}
+
+.btn-secondary:hover {
+  background: #229954;
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+
+.btn-danger:hover {
+  background: #c0392b;
+}
+
+.additional-skills-input {
+  display: grid;
+  grid-template-columns: 1fr 150px auto;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-end;
+}
+
+.custom-skill-name {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.custom-skill-name:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.custom-skill-level {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.3s;
+}
+
+.custom-skill-level:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.custom-skills-list {
+  margin-top: 1rem;
+}
+
+.custom-skill-item {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  padding: 1.2rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  border-left: 4px solid #667eea;
+  transition: all 0.3s;
+}
+
+.custom-skill-item:hover {
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.custom-skill-item strong {
+  color: #1e3c72;
+  font-size: 1.05rem;
+}
+
+.custom-skill-item span {
+  color: #667eea;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: #f0f4ff;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+}
+
+.skill-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .skill-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+  
+  .additional-skills-input {
+    grid-template-columns: 1fr;
+  }
+  
+  .custom-skill-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+}
+</style>
 </head>
 <body>
 
@@ -21,74 +338,253 @@
 
 <main class="page">
   <div class="container">
-    <h1>Build Your Skill Profile</h1>
-    <p class="muted">Select your skills, proficiency, and career goal</p>
+    <div class="page-header">
+      <h1>Build Your Skill Profile</h1>
+      <p>Select your skills, proficiency, and career goal</p>
+    </div>
 
-    <!-- Skills Section -->
-    <div class="skill-grid">
-      <div class="skill-box">
-        <label><input type="checkbox"> Python</label>
-        <select>
-          <option>Beginner</option>
-          <option>Intermediate</option>
-          <option>Advanced</option>
-        </select>
-      </div>
-
-      <div class="skill-box">
-        <label><input type="checkbox"> SQL</label>
-        <select>
-          <option>Beginner</option>
-          <option>Intermediate</option>
-          <option>Advanced</option>
-        </select>
-      </div>
-
-      <div class="skill-box">
-        <label><input type="checkbox"> FHIR</label>
-        <select>
-          <option>Beginner</option>
-          <option>Intermediate</option>
-          <option>Advanced</option>
-        </select>
-      </div>
-
-      <div class="skill-box">
-        <label><input type="checkbox"> HIPAA</label>
-        <select>
-          <option>Beginner</option>
-          <option>Intermediate</option>
-          <option>Advanced</option>
-        </select>
-      </div>
-
-      <div class="skill-box">
-        <label><input type="checkbox"> Machine Learning</label>
-        <select>
-          <option>Beginner</option>
-          <option>Intermediate</option>
-          <option>Advanced</option>
-        </select>
+    <div class="card">
+      <h2>Core Skills</h2>
+      <div class="skill-grid">
+        <div class="skill-box">
+          <label><input type="checkbox" class="skill-checkbox" value="Python"> Python <span class="badge">Core</span></label>
+          <select class="skill-level">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </div>
+        <div class="skill-box">
+          <label><input type="checkbox" class="skill-checkbox" value="SQL"> SQL</label>
+          <select class="skill-level">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </div>
+        <div class="skill-box">
+          <label><input type="checkbox" class="skill-checkbox" value="FHIR"> FHIR</label>
+          <select class="skill-level">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </div>
+        <div class="skill-box">
+          <label><input type="checkbox" class="skill-checkbox" value="HIPAA"> HIPAA</label>
+          <select class="skill-level">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </div>
+        <div class="skill-box">
+          <label><input type="checkbox" class="skill-checkbox" value="Machine Learning"> Machine Learning</label>
+          <select class="skill-level">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </div>
       </div>
     </div>
 
-    <!-- Career Goal Section -->
-    <div class="career-section">
-      <h2>Choose Your Career Goal</h2>
+    <div class="card">
+      <h2>Additional Skills</h2>
+      <div class="additional-skills-input">
+        <input type="text" class="custom-skill-name" id="customSkillName" placeholder="Add a new skill (e.g., Data Analytics, Tableau)">
+        <select class="custom-skill-level" id="customSkillLevel">
+          <option>Beginner</option>
+          <option>Intermediate</option>
+          <option>Advanced</option>
+        </select>
+        <button class="btn-secondary" id="addSkillBtn">Add</button>
+      </div>
+      <div class="custom-skills-list" id="customSkillsList"></div>
+    </div>
+
+    <div class="card career-section">
+      <h2>Career Goal</h2>
       <select id="careerSelect">
-        <option value="">-- Select Career Role --</option>
-        <option value="Health Informatics Analyst">Health Informatics Analyst</option>
-        <option value="Healthcare Data Analyst">Healthcare Data Analyst</option>
-        <option value="Medical AI Specialist">Medical AI Specialist</option>
-        <option value="Hospital IT Specialist">Hospital IT Specialist</option>
+        <option value="">Select a career path</option>
+        <option>Health Informatics Analyst</option>
+        <option>Healthcare Data Analyst</option>
+        <option>Medical AI Specialist</option>
+        <option>Hospital IT Specialist</option>
       </select>
-      <div id="careerDescription" class="career-desc"></div>
+      <p class="career-desc" id="careerDescription"></p>
     </div>
 
-    <button class="btn-primary big" id="saveSkillsBtn">Save & Continue</button>
+    <div class="card">
+      <button class="btn-primary" id="saveSkillsBtn">Save & Continue to Dashboard</button>
+    </div>
   </div>
 </main>
 
-<script src="script.js"></script>
+<script>
+// Auto-logout: Redirect to index if no valid session
+const currentUserCheck = JSON.parse(localStorage.getItem("currentUser") || "null");
+if (!currentUserCheck || currentUserCheck === "null") {
+  window.location.href = "index.html";
+  throw new Error("Redirecting to index");
+}
+
+const careerDescriptions = {
+  "Health Informatics Analyst":
+    "Bridges the gap between clinical practice and IT by managing health information systems.",
+  "Healthcare Data Analyst":
+    "Interprets healthcare data to improve patient outcomes and efficiency.",
+  "Medical AI Specialist":
+    "Develops machine learning models for diagnostics and predictive healthcare.",
+  "Hospital IT Specialist":
+    "Manages hospital networks, EHR systems, and infrastructure."
+};
+
+let currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+const careerSelect = document.getElementById("careerSelect");
+const careerDesc = document.getElementById("careerDescription");
+const saveSkillsBtn = document.getElementById("saveSkillsBtn");
+const addSkillBtn = document.getElementById("addSkillBtn");
+const logoutBtn = document.getElementById("logout");
+const customSkillsList = document.getElementById("customSkillsList");
+const customSkillName = document.getElementById("customSkillName");
+const customSkillLevel = document.getElementById("customSkillLevel");
+
+// Prefill if user exists
+window.addEventListener("DOMContentLoaded", () => {
+  if (!currentUser || currentUser === "null") {
+    window.location.href = "index.html";
+    return;
+  }
+
+  // Create a mapping of skill names to checkboxes
+  const skillCheckboxMap = {};
+  document.querySelectorAll(".skill-checkbox").forEach(checkbox => {
+    skillCheckboxMap[checkbox.value] = checkbox;
+  });
+
+  // Prefill skills from currentUser
+  if (currentUser.skills) {
+    currentUser.skills.forEach(skill => {
+      if (skillCheckboxMap[skill.name]) {
+        const checkbox = skillCheckboxMap[skill.name];
+        checkbox.checked = true;
+        const levelSelect = checkbox.parentElement.parentElement.querySelector("select");
+        if (levelSelect) {
+          levelSelect.value = skill.level;
+        }
+      }
+    });
+  }
+
+  // Prefill career
+  if (currentUser.careerGoal) {
+    careerSelect.value = currentUser.careerGoal;
+    careerDesc.textContent = careerDescriptions[currentUser.careerGoal];
+  }
+
+  // Display custom skills
+  if (currentUser.skills) {
+    currentUser.skills.forEach(skill => {
+      const isPredefined = ["Python", "SQL", "FHIR", "HIPAA", "Machine Learning"].includes(skill.name);
+      if (!isPredefined) {
+        displayCustomSkill(skill.name, skill.level);
+      }
+    });
+  }
+});
+
+// Career change listener
+careerSelect.addEventListener("change", () => {
+  careerDesc.textContent = careerDescriptions[careerSelect.value] || "";
+});
+
+// Add custom skill
+addSkillBtn.addEventListener("click", () => {
+  const skillName = customSkillName.value.trim();
+  const skillLevel = customSkillLevel.value;
+
+  if (!skillName) {
+    alert("Please enter a skill name");
+    return;
+  }
+
+  displayCustomSkill(skillName, skillLevel);
+  customSkillName.value = "";
+  customSkillLevel.value = "Beginner";
+});
+
+function displayCustomSkill(name, level) {
+  const item = document.createElement("div");
+  item.className = "custom-skill-item";
+  item.innerHTML = `
+    <div class="skill-info">
+      <strong>${name}</strong>
+      <span>${level}</span>
+    </div>
+    <button class="btn-danger" onclick="removeCustomSkill(this, '${name}')">Remove</button>
+  `;
+  customSkillsList.appendChild(item);
+}
+
+function removeCustomSkill(btn, name) {
+  btn.parentElement.remove();
+}
+
+// Save skills
+saveSkillsBtn.addEventListener("click", () => {
+  const selectedSkills = [];
+
+  // Get core skills
+  document.querySelectorAll(".skill-box").forEach(box => {
+    const checkbox = box.querySelector("input");
+    const skillName = checkbox.value;
+    const levelSelect = box.querySelector("select");
+    if (checkbox.checked) {
+      selectedSkills.push({
+        name: skillName,
+        level: levelSelect.value
+      });
+    }
+  });
+
+  // Get custom skills - FIXED: Look for .custom-skill-item
+  document.querySelectorAll(".custom-skill-item").forEach(item => {
+    const name = item.querySelector("strong").textContent;
+    const span = item.querySelector("span");
+    const level = span.textContent;
+    selectedSkills.push({
+      name: name,
+      level: level
+    });
+  });
+
+  const career = careerSelect.value;
+
+  if (selectedSkills.length === 0 || !career) {
+    alert("Please select at least one skill and a career goal");
+    return;
+  }
+
+  currentUser.skills = selectedSkills;
+  currentUser.careerGoal = career;
+
+  let users = JSON.parse(localStorage.getItem("users") || "[]");
+  users = users.map(u => (u.email === currentUser.email ? currentUser : u));
+
+  localStorage.setItem("users", JSON.stringify(users));
+  localStorage.setItem("currentUser", JSON.stringify(currentUser));
+
+  window.location.href = "dashboard.html";
+});
+
+// Logout
+logoutBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  localStorage.removeItem("currentUser");
+  window.location.href = "index.html";
+});
+</script>
+
 </body>
 </html>
