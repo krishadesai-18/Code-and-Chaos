@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Psychology & Organisational Behaviour — Comprehensive Notes</title>
+<style>
+  /* ── Reset & Base ── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #f0f2f5;
+    color: #2c3e50;
+    line-height: 1.75;
+    padding: 40px 20px;
+  }
+
+  /* ── Container ── */
+  .container {
+    max-width: 920px;
+    margin: 0 auto;
+  }
+
+  /* ── Cover Page ── */
+  .cover {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    border-radius: 18px;
+    padding: 70px 50px;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 36px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.25);
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(229,57,53,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 240px; height: 240px;
+    background: radial-gradient(circle, rgba(66,133,244,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .cover h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+    position: relative; z-index: 1;
+  }
+  .cover .subtitle {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.6);
+    position: relative; z-index: 1;
+  }
+  .cover .topics-badge {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+    position: relative; z-index: 1;
+  }
+  .cover .badge {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(4px);
+    padding: 7px 18px;
+    border-radius: 30px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.85);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Table of Contents ── */
+  .toc {
+    background: #fff;
+    border-radius: 14px;
+    padding: 32px 38px;
+    margin-bottom: 36px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .toc h2 {
+    font-size: 1.1rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+  .toc ol {
+    list-style: none;
+    counter-reset: toc;
+  }
+  .toc ol li {
+    counter-increment: toc;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .toc ol li:last-child { border-bottom: none; }
+  .toc .num {
+    font-weight: 700;
+    color: #e74c3c;
+    min-width: 24px;
+    font-size: 0.88rem;
+  }
+  .toc a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-size: 0.97rem;
+    transition: color 0.2s;
+  }
+  .toc a:hover { color: #e74c3c; }
+  .toc .sub { padding-left: 38px; font-size: 0.88rem; color: #666; }
+
+  /* ── Section Cards ── */
+  .section-card {
+    background: #fff;
+    border-radius: 14px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 28px 38px 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .section-icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+  .icon-red { background: #fef0ee; }
+  .icon-blue { background: #eef4fd; }
+  .icon-green { background: #eef7ed; }
+  .icon-purple { background: #f3eefe; }
+  
+  .section-header h2 {
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 4px;
+  }
+  .section-header .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+  .tag-red { background: #fde8e5; color: #c0392b; }
+  .tag-blue { background: #e8effe; color: #2980b9; }
+  .tag-green { background: #e5f5e2; color: #27ae60; }
+  .tag-purple { background: #f0e8fe; color: #8e44ad; }
+
+  .section-body {
+    padding: 0 38px 36px;
+  }
+
+  /* ── Typography within sections ── */
+  .section-body h3 {
+    font-size: 1.18rem;
+    color: #1a1a2e;
+    margin: 28px 0 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #f0f0f0;
+  }
+  .section-body h3::before {
+    content: '';
+    display: inline-block;
+    width: 4px; height: 18px;
+    background: #e74c3c;
+    border-radius: 2px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  .section-body h4 {
+    font-size: 1.02rem;
+    color: #34495e;
+    margin: 18px 0 6px;
+    font-weight: 600;
+  }
+  .section-body p {
+    color: #4a5568;
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+  }
+
+  /* ── Info Boxes ── */
+  .info-box {
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 18px 0;
+    font-size: 0.9rem;
+  }
+  .info-box.tip { background: #eef7ed; border-left: 4px solid #27ae60; }
+  .info-box.note { background: #eef4fd; border-left: 4px solid #2980b9; }
+  .info-box.highlight { background: #fef6e4; border-left: 4px solid #f39c12; }
+  .info-box .label {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .info-box.tip .label { color: #27ae60; }
+  .info-box.note .label { color: #2980b9; }
+  .info-box.highlight .label { color: #e67e22; }
+
+  /* ── Styled Lists ── */
+  .styled-list {
+    list-style: none;
+    padding: 0;
+  }
+  .styled-list li {
+    padding: 9px 0 9px 28px;
+    position: relative;
+    color: #4a5568;
+    font-size: 0.92rem;
+  }
+  .styled-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 17px;
+    width: 10px; height: 10px;
+    background: #e74c3c;
+    border-radius: 50%;
+  }
+  .styled-list li strong { color: #2c3e50; }
+
+  /* ── Two Column Grid ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 18px 0;
+  }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+  .col-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 18px;
+  }
+  .col-card h5 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin-bottom: 6px;
+  }
+  .col-card p { font-size: 0.85rem; color: #666; margin-bottom: 0; }
+
+  /* ── Johari Window Grid ── */
+  .johari-container {
+    margin: 24px 0;
+  }
+  .johari-labels-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr;
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+  .johari-labels-row .corner { }
+  .johari-labels-row .col-label {
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #fff;
+    padding: 10px 6px;
+    border-radius: 8px;
+  }
+  .col-label.known { background: #3498db; }
+  .col-label.unknown { background: #95a5a6; }
+  
+  .johari-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 1fr;
+    gap: 4px;
+  }
+  .johari-row .row-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 14px;
+    font-weight: 700;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #fff;
+    background: #e74c3c;
+    border-radius: 8px;
+    padding: 16px 14px;
+  }
+  .johari-row .row-label.others { background: #9b59b6; }
+  
+  .johari-cell {
+    border-radius: 10px;
+    padding: 20px 18px;
+    min-height: 160px;
+  }
+  .johari-cell h5 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .johari-cell p { font-size: 0.82rem; color: #555; line-height: 1.6; margin: 0; }
+  
+  .cell-open { background: #d5f5e3; }
+  .cell-open h5 { color: #1e8449; }
+  .cell-blind { background: #fadbd8; }
+  .cell-blind h5 { color: #c0392b; }
+  .cell-hidden { background: #d6eaf8; }
+  .cell-hidden h5 { color: #1a5276; }
+  .cell-unknown { background: #f4ecf7; }
+  .cell-unknown h5 { color: #6c3483; }
+
+  /* ── School of Thought Cards ── */
+  .school-card {
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin: 14px 0;
+    border-left: 5px solid;
+  }
+  .school-card h4 {
+    margin-top: 0;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .school-card p { font-size: 0.88rem; margin-bottom: 8px; }
+  .school-card .founder { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+  
+  .school-structuralism { background: #fef5e7; border-color: #f39c12; }
+  .school-structuralism h4 { color: #d35400; }
+  .school-structuralism .founder { color: #e67e22; }
+  
+  .school-functionalism { background: #eafaf1; border-color: #27ae60; }
+  .school-functionalism h4 { color: #1e8449; }
+  .school-functionalism .founder { color: #229954; }
+  
+  .school-behaviorism { background: #eaf2f8; border-color: #2980b9; }
+  .school-behaviorism h4 { color: #1a5276; }
+  .school-behaviorism .founder { color: #2471a3; }
+  
+  .school-gestalt { background: #f4ecf7; border-color: #8e44ad; }
+  .school-gestalt h4 { color: #6c3483; }
+  .school-gestalt .founder { color: #7d3c98; }
+  
+  .school-psychoanalysis { background: #fdedec; border-color: #e74c3c; }
+  .school-psychoanalysis h4 { color: #c0392b; }
+  .school-psychoanalysis .founder { color: #cb4335; }
+  
+  .school-humanistic { background: #ebedef; border-color: #566573; }
+  .school-humanistic h4 { color: #2c3e50; }
+  .school-humanistic .founder { color: #566573; }
+  
+  .school-cognitive { background: #f2f3f4; border-color: #1abc9c; }
+  .school-cognitive h4 { color: #148f77; }
+  .school-cognitive .founder { color: #17a589; }
+
+  /* ── Learning Styles Table ── */
+  .learning-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0;
+    font-size: 0.87rem;
+  }
+  .learning-table th {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .learning-table th:first-child { border-radius: 8px 0 0 0; }
+  .learning-table th:last-child { border-radius: 0 8px 0 0; }
+  .learning-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid #eee;
+    color: #4a5568;
+    vertical-align: top;
+  }
+  .learning-table tr:nth-child(even) td { background: #f8f9fa; }
+  .learning-table tr:last-child td { border-bottom: none; }
+  .learning-table td:first-child { font-weight: 600; color: #2c3e50; }
+
+  /* ── Classical & Operant Conditioning Diagrams ── */
+  .conditioning-flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 14px 0;
+    justify-content: center;
+  }
+  .flow-box {
+    background: #eef4fd;
+    border: 1px solid #d0e4f7;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #1a5276;
+    text-align: center;
+    min-width: 110px;
+  }
+  .flow-arrow {
+    font-size: 1.3rem;
+    color: #e74c3c;
+    font-weight: 700;
+  }
+  .flow-box.green { background: #eafaf1; border-color: #aed6bf; color: #1e8449; }
+  .flow-box.red { background: #fadbd8; border-color: #f1948a; color: #c0392b; }
+  .flow-box.purple { background: #f4ecf7; border-color: #d2b4de; color: #6c3483; }
+
+  /* ── Reinforcement Table ── */
+  .reinf-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 14px 0;
+  }
+  .reinf-card {
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .reinf-card h5 { font-size: 0.88rem; margin-bottom: 4px; }
+  .reinf-card p { font-size: 0.82rem; color: #555; margin: 0; }
+  .reinf-pos { background: #d5f5e3; }
+  .reinf-pos h5 { color: #1e8449; }
+  .reinf-neg { background: #fadbd8; }
+  .reinf-neg h5 { color: #c0392b; }
+  .reinf-puni-pos { background: #fef5e7; }
+  .reinf-puni-pos h5 { color: #d35400; }
+  .reinf-puni-neg { background: #f4ecf7; }
+  .reinf-puni-neg h5 { color: #6c3483; }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    color: #aaa;
+    font-size: 0.8rem;
+    margin-top: 40px;
+    padding-top: 20px;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    border: none;
+    border-top: 2px solid #eee;
+    margin: 26px 0;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ═══════════════ COVER ═══════════════ -->
+<div class="cover">
+  <h1>Psychology &amp; Organisational Behaviour</h1>
+  <p class="subtitle">Comprehensive Study Notes</p>
+  <div class="topics-badge">
+    <span class="badge">1. Schools of Thought in Psychology</span>
+    <span class="badge">2. Johari Window</span>
+    <span class="badge">3. Introduction to Organisational Behaviour</span>
+    <span class="badge">4. Learning</span>
+  </div>
+</div>
+
+<!-- ═══════════════ TABLE OF CONTENTS ═══════════════ -->
+<div class="toc">
+  <h2>Table of Contents</h2>
+  <ol>
+    <li><span class="num">01</span><a href="#schools">Schools of Thought in Psychology</a></li>
+    <li><span class="num">02</span><a href="#johari">The Johari Window</a></li>
+    <li><span class="num">03</span><a href="#ob">Introduction to Organisational Behaviour</a></li>
+    <li><span class="num">04</span><a href="#learning">Learning</a></li>
+  </ol>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+          1. SCHOOLS OF THOUGHT IN PSYCHOLOGY
+     ═══════════════════════════════════════════════════ -->
+<div class="section-card" id="schools">
+  <div class="section-header">
+    <div class="section-icon icon-red">🧠</div>
+    <div>
+      <h2>Schools of Thought in Psychology</h2>
+      <span class="tag tag-red">Course Pack</span>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <p>Psychology as a formal discipline began in 1879 when Wilhelm Wundt established the first experimental psychology laboratory in Leipzig, Germany. Since then, several distinct "schools of thought" have emerged — each offering a unique lens through which human behaviour and mental processes are understood. These schools are not mutually exclusive; modern psychology draws from all of them.</p>
+
+    <div class="info-box note">
+      <div class="label">📌 Key Idea</div>
+      Each school of thought arose as a reaction to the limitations perceived in the previous one. Understanding this progression is essential to grasping how psychology evolved into the integrative science it is today.
+    </div>
+
+    <!-- Structuralism -->
+    <div class="school-card school-structuralism">
+      <div class="founder">Founder: Wilhelm Wundt &amp; Edward Titchener</div>
+      <h4>1. Structuralism</h4>
+      <p>Structuralism was the <strong>first formal school</strong> of psychology. It aimed to understand the <strong>structure of conscious experience</strong> by breaking it down into its simplest, basic elements — much like a chemist breaks matter into elements.</p>
+      <p><strong>Method:</strong> Introspection — trained observers reported their inner experiences in a controlled, systematic way (e.g., perceptions, sensations, feelings).</p>
+      <p><strong>Limitation:</strong> Introspection was subjective and difficult to replicate, making it unscientific by modern standards.</p>
+    </div>
+
+    <!-- Functionalism -->
+    <div class="school-card school-functionalism">
+      <div class="founder">Founders: William James &amp; John Dewey</div>
+      <h4>2. Functionalism</h4>
+      <p>Functionalists reacted against the rigid, lab-bound approach of structuralism. Instead of asking <em>"What is consciousness made of?"</em>, they asked <em>"What does consciousness DO?"</em> — i.e., how do mental processes <strong>help organisms adapt</strong> to their environment?</p>
+      <p><strong>Key Idea:</strong> Mental processes serve a <strong>functional purpose</strong> — they help us survive and adapt. This school was heavily influenced by Charles Darwin's theory of evolution.</p>
+      <p><strong>Method:</strong> Broader observation methods, including studying animals and children, not just lab introspection.</p>
+    </div>
+
+    <!-- Behaviourism -->
+    <div class="school-card school-behaviorism">
+      <div class="founder">Founders: John B. Watson, B.F. Skinner, Ivan Pavlov</div>
+      <h4>3. Behaviourism</h4>
+      <p>Behaviourism was a <strong>revolutionary paradigm shift</strong>. Watson argued that psychology should be a <strong>purely objective science</strong> — and since internal mental states (like thoughts and feelings) cannot be directly observed or measured, they should be excluded from study altogether.</p>
+      <p><strong>Focus:</strong> Only <strong>observable, measurable behaviour</strong> is the subject of study. The mind is a "black box" that we cannot and should not try to open.</p>
+      <p><strong>Key Contributions:</strong> Classical conditioning (Pavlov), Operant conditioning (Skinner), the Law of Effect, and the concept that all behaviour is learned through interaction with the environment.</p>
+      <p><strong>Limitation:</strong> Ignored the role of cognition, emotions, and innate biological predispositions.</p>
+    </div>
+
+    <!-- Gestalt -->
+    <div class="school-card school-gestalt">
+      <div class="founder">Founders: Max Wertheimer, Wolfgang Köhler, Kurt Koffka</div>
+      <h4>4. Gestalt Psychology</h4>
+      <p>Emerging in Germany in the early 20th century, Gestalt psychologists argued that <strong>the whole is greater than the sum of its parts</strong>. They criticised structuralism's approach of breaking experience into tiny pieces, saying that doing so destroys the very phenomenon being studied.</p>
+      <p><strong>Focus:</strong> How people naturally organise and perceive information as <strong>unified wholes</strong> — patterns, groupings, and meaningful structures emerge automatically.</p>
+      <p><strong>Key Principles:</strong> Proximity, Similarity, Closure, Continuity, Figure-Ground — these are the laws of perceptual organisation.</p>
+      <p><strong>Insight:</strong> They also introduced the concept of <strong>"insight learning"</strong> — sudden understanding of a problem without trial-and-error (famously demonstrated with Köhler's chimpanzee experiments).</p>
+    </div>
+
+    <!-- Psychoanalysis -->
+    <div class="school-card school-psychoanalysis">
+      <div class="founder">Founder: Sigmund Freud</div>
+      <h4>5. Psychoanalysis (Psychodynamic Psychology)</h4>
+      <p>Freud proposed that most of our behaviour is driven by <strong>unconscious processes</strong> — desires, fears, and memories that we are completely unaware of. The conscious mind is merely the "tip of the iceberg."</p>
+      <p><strong>Key Concepts:</strong> The <strong>Id</strong> (primitive desires, operates on the pleasure principle), <strong>Ego</strong> (rational, mediates between id and reality), and <strong>Superego</strong> (moral conscience, internalised social norms).</p>
+      <p><strong>Method:</strong> Free association, dream analysis, and analysis of Freudian slips to access the unconscious mind.</p>
+      <p><strong>Significance:</strong> Although many of Freud's specific ideas have been criticised or revised, his emphasis on the <strong>power of the unconscious</strong> and early childhood experiences on adult behaviour remains influential.</p>
+    </div>
+
+    <!-- Humanistic -->
+    <div class="school-card school-humanistic">
+      <div class="founder">Founders: Abraham Maslow &amp; Carl Rogers</div>
+      <h4>6. Humanistic Psychology</h4>
+      <p>Humanistic psychologists rejected both behaviourism's mechanistic view and psychoanalysis's focus on dysfunction. They argued that psychology should focus on <strong>healthy, whole individuals</strong> and their potential for growth.</p>
+      <p><strong>Key Ideas:</strong> People are inherently good and motivated toward <strong>self-actualisation</strong> — realising their fullest potential. Maslow's Hierarchy of Needs placed self-actualisation at the top, above physiological, safety, love/belonging, and esteem needs.</p>
+      <p><strong>Carl Rogers'</strong> contribution was the idea of <strong>unconditional positive regard</strong> — the belief that every individual deserves respect and acceptance regardless of their actions.</p>
+    </div>
+
+    <!-- Cognitive -->
+    <div class="school-card school-cognitive">
+      <div class="founder">Key Figures: George Miller, Jerome Bruner, Jean Piaget</div>
+      <h4>7. Cognitive Psychology (The Cognitive Revolution)</h4>
+      <p>By the 1950s–60s, behaviourism's strict exclusion of internal mental processes was seen as too limiting. The <strong>Cognitive Revolution</strong> brought the "mind" back into psychology.</p>
+      <p><strong>Focus:</strong> How people <strong>acquire, process, store, and retrieve information</strong>. The mind is compared to a computer — it takes in data (input), processes it, and produces output (behaviour).</p>
+      <p><strong>Key Areas:</strong> Memory, attention, perception, thinking, language, decision-making, and problem-solving.</p>
+      <p><strong>Significance:</strong> This is arguably the <strong>dominant paradigm</strong> in modern psychology and forms a critical bridge to understanding behaviour in organisational settings.</p>
+    </div>
+
+    <div class="info-box tip">
+      <div class="label">💡 Summary Tip</div>
+      Remember the progression: Structuralism → Functionalism → Behaviourism → (Gestalt, Psychoanalysis challenged it) → Humanistic → Cognitive Revolution. Each school addressed what the previous one left out.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+          2. THE JOHARI WINDOW
+     ═══════════════════════════════════════════════════ -->
+<div class="section-card" id="johari">
+  <div class="section-header">
+    <div class="section-icon icon-blue">🪟</div>
+    <div>
+      <h2>The Johari Window</h2>
+      <span class="tag tag-blue">Course Pack</span>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <p>The Johari Window is a <strong>self-awareness and interpersonal communication model</strong> developed in 1955 by psychologists <strong>Joseph Luft</strong> and <strong>Harry Ingham</strong> (the name "Johari" is a combination of their first names: <strong>Jo</strong>seph + <strong>Hari</strong>). It is widely used in organisational behaviour, leadership development, and team-building.</p>
+
+    <p>The model uses a simple 2×2 grid based on two dimensions:</p>
+    <ul class="styled-list">
+      <li><strong>What is known or unknown to the individual (Self)</strong></li>
+      <li><strong>What is known or unknown to others</strong></li>
+    </ul>
+
+    <h3>The Four Panes</h3>
+
+    <!-- Johari Window Visual -->
+    <div class="johari-container">
+      <div class="johari-labels-row">
+        <div class="corner"></div>
+        <div class="col-label known">Known to Self</div>
+        <div class="col-label unknown">Unknown to Self</div>
+      </div>
+      <div class="johari-row">
+        <div class="row-label">Known to Others</div>
+        <div class="johari-cell cell-open">
+          <h5>🟢 Open / Arena</h5>
+          <p>Information known to both self and others. This is the space of open, honest communication — shared knowledge, behaviours, and feelings.</p>
+        </div>
+        <div class="johari-cell cell-blind">
+          <h5>🔴 Blind Spot</h5>
+          <p>Known to others but NOT to self. These are habits, behaviours, or traits that others see but the individual is unaware of (e.g., speaking too loudly, being defensive).</p>
+        </div>
+      </div>
+      <div class="johari-row" style="margin-top: 4px;">
+        <div class="row-label others">Unknown to Others</div>
+        <div class="johari-cell cell-hidden">
+          <h5>🔵 Hidden / Façade</h5>
+          <p>Known to self but NOT to others. These are personal secrets, private feelings, or information the person consciously chooses not to share.</p>
+        </div>
+        <div class="johari-cell cell-unknown">
+          <h5>🟣 Unknown</h5>
+          <p>Unknown to BOTH self and others. This includes subconscious beliefs, latent talents, or potential that neither the person nor anyone else has discovered yet.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Detailed Explanation of Each Pane</h3>
+
+    <h4>🟢 Open / Arena</h4>
+    <p>This is the most desirable and productive quadrant. The larger this area is, the more effective and trust-based the individual's relationships become. Information here includes things like your name, your job role, your openly expressed opinions, and your known skills. When people communicate openly, the Open area expands.</p>
+
+    <h4>🔴 Blind Spot</h4>
+    <p>This is the area of greatest risk because the individual doesn't know what others perceive. Examples include unconscious biases, communication habits, leadership blind spots, or interpersonal friction caused by behaviours the person doesn't recognise in themselves. <strong>Feedback from others</strong> is the primary tool for shrinking this area.</p>
+
+    <h4>🔵 Hidden / Façade</h4>
+    <p>People maintain a Hidden area for various reasons — fear of judgement, lack of trust, or strategic self-presentation. In organisational settings, an employee might hide personal struggles or reservations about a decision. <strong>Voluntary self-disclosure</strong> is the way to shrink this quadrant — moving information into the Open area requires the individual's own willingness to share.</p>
+
+    <h4>🟣 Unknown</h4>
+    <p>This is the most mysterious quadrant. It includes things like unconscious beliefs, suppressed memories, untapped talents, and potential future behaviours. This area can shrink through <strong>self-exploration, therapy, new experiences, and personal development</strong>. As individuals grow, insights from the Unknown may move into other panes.</p>
+
+    <h3>How the Window Changes</h3>
+    <div class="info-box highlight">
+      <div class="label">⚠️ Key Mechanism</div>
+      The Johari Window is <strong>dynamic</strong>, not static. Two primary actions reshape it:
+      <br><br>
+      <strong>1. Feedback (from others → reduces Blind Spot):</strong> When others share what they observe about you, your Blind Spot shrinks and the Open area grows.
+      <br><br>
+      <strong>2. Self-Disclosure (from self → reduces Hidden area):</strong> When you voluntarily share personal information, your Hidden/Façade area shrinks and the Open area grows.
+      <br><br>
+      The goal in healthy teams and relationships is to <strong>maximise the Open area</strong> through a continuous cycle of feedback and disclosure.
+    </div>
+
+    <h3>Johari Window in Organisations</h3>
+    <p>In workplace settings, the Johari Window is applied to improve:</p>
+    <ul class="styled-list">
+      <li><strong>Leadership effectiveness:</strong> Leaders with large Blind Spots may make poor decisions without realising it. 360-degree feedback helps shrink this area.</li>
+      <li><strong>Team trust and collaboration:</strong> Teams with large Open areas communicate more honestly and collaborate more effectively.</li>
+      <li><strong>Performance appraisals:</strong> Structured feedback sessions help employees understand their Blind Spots.</li>
+      <li><strong>Self-awareness:</strong> The model encourages individuals to actively seek feedback and practice vulnerability.</li>
+    </ul>
+
+    <div class="info-box tip">
+      <div class="label">💡 Exam Tip</div>
+      If asked to explain how to improve the Johari Window, the answer always revolves around two actions: <strong>seeking feedback</strong> (to reduce blind spots) and <strong>practising self-disclosure</strong> (to reduce the façade). Both expand the Open/Arena area.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     3. INTRODUCTION TO ORGANISATIONAL BEHAVIOUR
+     ═══════════════════════════════════════════════════ -->
+<div class="section-card" id="ob">
+  <div class="section-header">
+    <div class="section-icon icon-green">🏢</div>
+    <div>
+      <h2>Introduction to Organisational Behaviour</h2>
+      <span class="tag tag-green">Textbook</span>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <p><strong>Organisational Behaviour (OB)</strong> is the systematic study of how <strong>individuals, groups, and structures</strong> within organisations behave — and how that behaviour impacts organisational performance. It sits at the intersection of psychology, sociology, economics, and management.</p>
+
+    <h3>Definition &amp; Scope</h3>
+    <p>OB is fundamentally concerned with three levels of analysis:</p>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>👤 Individual Level</h5>
+        <p>How a single person behaves at work — their attitudes, perceptions, motivation, job satisfaction, personality, and decision-making.</p>
+      </div>
+      <div class="col-card">
+        <h5>👥 Group Level</h5>
+        <p>How people behave in teams and groups — teamwork, conflict, communication, group dynamics, leadership, and collective norms.</p>
+      </div>
+      <div class="col-card">
+        <h5>🏛️ Organisational Level</h5>
+        <p>How the overall structure, culture, climate, and systems of an organisation shape and influence the behaviour of individuals and groups.</p>
+      </div>
+      <div class="col-card">
+        <h5>🌐 Environment</h5>
+        <p>How external factors — industry trends, competition, legal/regulatory changes, and societal shifts — affect the organisation and its people.</p>
+      </div>
+    </div>
+
+    <h3>Why Study Organisational Behaviour?</h3>
+    <p>OB is studied because <strong>people are the most critical resource</strong> in any organisation. Understanding how they think, feel, and behave at work enables managers and leaders to:</p>
+    <ul class="styled-list">
+      <li><strong>Improve employee performance</strong> by aligning work design with human motivation and cognition.</li>
+      <li><strong>Enhance job satisfaction and engagement</strong>, reducing turnover and absenteeism.</li>
+      <li><strong>Manage conflict effectively</strong> at individual, group, and organisational levels.</li>
+      <li><strong>Build high-performing teams</strong> through understanding of group dynamics.</li>
+      <li><strong>Design better organisations</strong> — structures, cultures, and systems that bring out the best in people.</li>
+      <li><strong>Lead more effectively</strong> by understanding how leadership behaviour impacts others.</li>
+    </ul>
+
+    <h3>Key Disciplines That Feed into OB</h3>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Psychology</h5>
+        <p>Contributes understanding of individual behaviour — perception, motivation, learning, personality, attitudes, and mental health.</p>
+      </div>
+      <div class="col-card">
+        <h5>Sociology</h5>
+        <p>Contributes understanding of group and organisational behaviour — social norms, culture, conflict, status hierarchies, and power dynamics.</p>
+      </div>
+      <div class="col-card">
+        <h5>Social Psychology</h5>
+        <p>Bridges the gap between individual and group — studies how people influence one another, conformity, persuasion, and intergroup relations.</p>
+      </div>
+      <div class="col-card">
+        <h5>Anthropology</h5>
+        <p>Contributes understanding of organisational culture — rituals, values, symbols, and unwritten norms that define "how we do things here."</p>
+      </div>
+      <div class="col-card">
+        <h5>Economics</h5>
+        <p>Contributes understanding of how people make decisions under resource constraints, incentive systems, and the relationship between compensation and behaviour.</p>
+      </div>
+      <div class="col-card">
+        <h5>Political Science</h5>
+        <p>Contributes understanding of power, politics, influence, and decision-making within organisational hierarchies.</p>
+      </div>
+    </div>
+
+    <h3>Core Topics in OB</h3>
+    <p>OB covers a wide range of interconnected topics. The major areas include:</p>
+    <ul class="styled-list">
+      <li><strong>Perception and Individual Differences:</strong> How people interpret information and how personality traits, values, and attitudes shape behaviour.</li>
+      <li><strong>Motivation:</strong> What drives people to work — intrinsic vs. extrinsic motivation, theories like Maslow's, Herzberg's Two-Factor Theory, and Self-Determination Theory.</li>
+      <li><strong>Job Satisfaction and Engagement:</strong> How organisational conditions influence employee well-being and commitment.</li>
+      <li><strong>Learning and Training:</strong> How individuals acquire new skills, behaviours, and knowledge in the workplace.</li>
+      <li><strong>Group Dynamics and Teamwork:</strong> Stages of group development (Tuckman's model), roles, norms, and effective team functioning.</li>
+      <li><strong>Leadership:</strong> Styles of leadership (transactional, transformational, situational), and how leaders influence organisational outcomes.</li>
+      <li><strong>Communication:</strong> Formal and informal communication channels, barriers, and their impact on organisational effectiveness.</li>
+      <li><strong>Conflict Management:</strong> Sources of conflict, resolution strategies, and the role of negotiation.</li>
+      <li><strong>Organisational Culture and Climate:</strong> The shared beliefs, values, and norms that define an organisation's identity and influence behaviour.</li>
+      <li><strong>Change Management:</strong> How organisations adapt to internal and external pressures, and how to manage resistance to change.</li>
+    </ul>
+
+    <h3>OB vs. Human Resource Management (HRM)</h3>
+    <div class="info-box note">
+      <div class="label">📌 Important Distinction</div>
+      <strong>OB</strong> is a <em>discipline</em> — an academic field of study focused on <em>understanding</em> behaviour in organisations. It is descriptive and analytical.
+      <br><br>
+      <strong>HRM</strong> is a <em>function</em> — a set of <em>practices and strategies</em> used to manage the human resource, including recruitment, training, compensation, and retention. It is prescriptive and applied.
+      <br><br>
+      OB provides the <strong>theoretical foundation</strong> that HRM uses to design and implement its practices.
+    </div>
+
+    <h3>Approaches to Studying OB</h3>
+    <p>OB uses both <strong>quantitative</strong> methods (surveys, experiments, statistical analysis) and <strong>qualitative</strong> methods (interviews, case studies, observation) to generate knowledge. The goal is always to produce <strong>evidence-based management</strong> — making decisions based on research rather than intuition or tradition alone.</p>
+
+    <div class="info-box tip">
+      <div class="label">💡 Remember</div>
+      OB is not about manipulating people — it is about <strong>understanding</strong> them so that organisations can create environments where both the organisation and its people can <strong>thrive together</strong>.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+          4. LEARNING
+     ═══════════════════════════════════════════════════ -->
+<div class="section-card" id="learning">
+  <div class="section-header">
+    <div class="section-icon icon-purple">📚</div>
+    <div>
+      <h2>Learning</h2>
+      <span class="tag tag-purple">Textbook</span>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <p><strong>Learning</strong> is defined as a <strong>relatively permanent change in behaviour or behaviour potential</strong> that results from <strong>experience</strong> (as opposed to maturation, fatigue, or temporary states). It is one of the most fundamental concepts in psychology and organisational behaviour because it explains how people acquire skills, change attitudes, and adapt to new environments.</p>
+
+    <div class="info-box note">
+      <div class="label">📌 Key Definition</div>
+      Learning = a <strong>relatively permanent change</strong> in behaviour or behaviour potential, resulting from <strong>experience or practice</strong>. It is NOT caused by: maturation (biological growth), fatigue, temporary motivation, or drugs/alcohol.
+    </div>
+
+    <h3>Major Theories of Learning</h3>
+    <p>Three broad theoretical perspectives explain how learning occurs:</p>
+
+    <hr class="divider">
+
+    <h4>A. Classical Conditioning (Pavlovian Conditioning)</h4>
+    <p><strong>Ivan Pavlov</strong>, a Russian physiologist, discovered classical conditioning while studying digestion in dogs. He noticed that dogs salivated not only at the sight of food, but also at stimuli that were associated with food — like a bell that was rung before meals.</p>
+
+    <h4 style="font-size: 0.92rem; color: #666; margin-top: 12px;">Key Components:</h4>
+    <table class="learning-table">
+      <tr>
+        <th>Term</th>
+        <th>Meaning</th>
+        <th>Example (Pavlov)</th>
+      </tr>
+      <tr>
+        <td>Unconditioned Stimulus (US)</td>
+        <td>A stimulus that naturally triggers a response without any learning</td>
+        <td>Food</td>
+      </tr>
+      <tr>
+        <td>Unconditioned Response (UR)</td>
+        <td>The natural, unlearned response to the US</td>
+        <td>Salivation</td>
+      </tr>
+      <tr>
+        <td>Conditioned Stimulus (CS)</td>
+        <td>A previously neutral stimulus that, after repeated pairing with the US, triggers a response on its own</td>
+        <td>The Bell</td>
+      </tr>
+      <tr>
+        <td>Conditioned Response (CR)</td>
+        <td>The learned response to the CS — similar (but usually weaker) than the UR</td>
+        <td>Salivation at the bell</td>
+      </tr>
+    </table>
+
+    <h4 style="font-size: 0.92rem; color: #666; margin-top: 4px;">The Classical Conditioning Process:</h4>
+    <div class="conditioning-flow">
+      <div class="flow-box">🔔 Bell (CS)</div>
+      <div class="flow-arrow">+</div>
+      <div class="flow-box green">🍖 Food (US)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box red">💧 Salivation (UR)</div>
+    </div>
+    <p style="text-align:center; font-size: 0.82rem; color: #888; margin-top: -6px;">After repeated pairing…</p>
+    <div class="conditioning-flow">
+      <div class="flow-box">🔔 Bell (CS) alone</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box purple">💧 Salivation (CR)</div>
+    </div>
+
+    <p><strong>Organisational Application:</strong> Classical conditioning explains how employees may develop emotional responses (anxiety, enthusiasm, or dread) toward certain workplace stimuli — such as feeling stressed whenever they hear about a performance review, because past reviews were associated with criticism.</p>
+
+    <hr class="divider">
+
+    <h4>B. Operant Conditioning (Instrumental Conditioning)</h4>
+    <p><strong>B.F. Skinner</strong> extended Pavlov's work by focusing on how behaviour is shaped by its <strong>consequences</strong>. Unlike classical conditioning (which deals with automatic responses), operant conditioning deals with <strong>voluntary behaviours</strong>. The core principle is: <em>"Behaviour that is reinforced tends to be repeated; behaviour that is punished tends to be suppressed."</em></p>
+
+    <h4 style="font-size: 0.92rem; color: #666; margin-top: 14px;">The Law of Effect (Edward Thorndike):</h4>
+    <p>Behaviours followed by <strong>satisfying consequences</strong> are strengthened; behaviours followed by <strong>unsatisfying consequences</strong> are weakened. Skinner built upon this with his more rigorous experimental framework.</p>
+
+    <h4 style="font-size: 0.92rem; color: #666; margin-top: 14px;">Types of Reinforcement and Punishment:</h4>
+    <div class="reinf-grid">
+      <div class="reinf-card reinf-pos">
+        <h5>✅ Positive Reinforcement</h5>
+        <p><strong>Adding</strong> a rewarding stimulus after a desired behaviour → behaviour increases.<br><em>Example: Giving a bonus for hitting sales targets.</em></p>
+      </div>
+      <div class="reinf-card reinf-neg">
+        <h5>➖ Negative Reinforcement</h5>
+        <p><strong>Removing</strong> an unpleasant stimulus after a desired behaviour → behaviour increases.<br><em>Example: Removing extra duties once an employee improves attendance.</em></p>
+      </div>
+      <div class="reinf-card reinf-puni-pos">
+        <h5>⚠️ Positive Punishment</h5>
+        <p><strong>Adding</strong> an unpleasant stimulus after an undesired behaviour → behaviour decreases.<br><em>Example: Issuing a formal warning for misconduct.</em></p>
+      </div>
+      <div class="reinf-card reinf-puni-neg">
+        <h5>🚫 Negative Punishment</h5>
+        <p><strong>Removing</strong> a rewarding stimulus after an undesired behaviour → behaviour decreases.<br><em>Example: Withholding a bonus due to poor performance.</em></p>
+      </div>
+    </div>
+
+    <h4 style="font-size: 0.92rem; color: #666; margin-top: 14px;">Schedules of Reinforcement:</h4>
+    <p>Skinner found that <em>how often</em> reinforcement is delivered significantly affects how quickly and how strongly behaviour is learned and how resistant it is to extinction:</p>
+    <table class="learning-table">
+      <tr>
+        <th>Schedule</th>
+        <th>When Reinforcement is Given</th>
+        <th>Effect</th>
+      </tr>
+      <tr>
+        <td>Continuous</td>
+        <td>After every desired behaviour</td>
+        <td>Fast learning, but behaviour stops quickly when reinforcement stops (low extinction resistance)</td>
+      </tr>
+      <tr>
+        <td>Fixed Ratio</td>
+        <td>After a set number of behaviours (e.g., every 5th sale)</td>
+        <td>High rate of behaviour; brief pause after each reinforcement</td>
+      </tr>
+      <tr>
+        <td>Variable Ratio</td>
+        <td>After an unpredictable number of behaviours</td>
+        <td><strong>Highest persistence</strong> — most resistant to extinction (e.g., slot machines)</td>
+      </tr>
+      <tr>
+        <td>Fixed Interval</td>
+        <td>After a fixed time period (e.g., monthly salary)</td>
+        <td>Behaviour increases just before the reinforcement is due, then drops ("scalloping effect")</td>
+      </tr>
+      <tr>
+        <td>Variable Interval</td>
+        <td>After unpredictable time intervals</td>
+        <td>Steady, consistent rate of behaviour (e.g., random inspections)</td>
+      </tr>
+    </table>
+
+    <hr class="divider">
+
+    <h4>C. Social Learning Theory (Social Cognitive Theory)</h4>
+    <p><strong>Albert Bandura</strong> proposed that much of what people learn comes not from direct experience, but from <strong>observing others</strong>. This theory bridges behaviourism and cognitive psychology.</p>
+
+    <p><strong>Key Concepts:</strong></p>
+    <ul class="styled-list">
+      <li><strong>Observational Learning (Modelling):</strong> People learn by watching others perform behaviours and noting the consequences. The person being observed is called the <strong>model</strong>.</li>
+      <li><strong>Vicarious Reinforcement:</strong> If you see someone rewarded for a behaviour, you are more likely to imitate it — even though you weren't personally rewarded.</li>
+      <li><strong>Vicarious Punishment:</strong> If you see someone punished for a behaviour, you are less likely to repeat it.</li>
+      <li><strong>Self-Efficacy:</strong> Your belief in your <strong>own ability</strong> to succeed in a particular task. High self-efficacy leads to greater effort, persistence, and performance.</li>
+      <li><strong>Self-Regulation:</strong> The ability to set personal goals, monitor your own progress, and adjust behaviour accordingly — without external reinforcement.</li>
+    </ul>
+
+    <p><strong>Organisational Application:</strong> New employees learn much of their behaviour by watching how senior colleagues and managers act — especially how they handle difficult situations, treat clients, and respond to challenges. This is why <strong>role modelling by leaders</strong> is so powerful in shaping organisational culture.</p>
+
+    <hr class="divider">
+
+    <h3>Types of Learning in the Workplace</h3>
+    <table class="learning-table">
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Example</th>
+      </tr>
+      <tr>
+        <td>Formal Learning</td>
+        <td>Structured, planned learning activities organised by the organisation</td>
+        <td>Classroom training, e-learning modules, workshops</td>
+      </tr>
+      <tr>
+        <td>Informal Learning</td>
+        <td>Unstructured learning that happens naturally on the job</td>
+        <td>Learning from a colleague, trial-and-error, reading industry news</td>
+      </tr>
+      <tr>
+        <td>On-the-Job Learning</td>
+        <td>Learning by actually performing the work task</td>
+        <td>Shadowing, mentoring, project-based learning</td>
+      </tr>
+      <tr>
+        <td>Transfer of Learning</td>
+        <td>Applying knowledge or skills learned in one context to a new context</td>
+        <td>Applying communication skills from a training course to actual client meetings</td>
+      </tr>
+    </table>
+
+    <h3>Extinction and Reinforcement Traps</h3>
+    <p><strong>Extinction</strong> occurs when a previously reinforced behaviour is no longer reinforced, causing it to gradually decrease and eventually stop. In organisations, this happens when employees' good work goes unrecognised — over time, they stop putting in extra effort.</p>
+    <p><strong>Reinforcement Traps</strong> occur when managers inadvertently reinforce undesired behaviour. For example, an employee who complains loudly gets immediate attention and resolution — this inadvertently reinforces complaining as a strategy.</p>
+
+    <div class="info-box tip">
+      <div class="label">💡 Exam Tip — Putting It All Together</div>
+      When answering questions on learning, always connect the theory to the organisational context:
+      <br><br>
+      • <strong>Classical conditioning</strong> → explains <em>emotional responses</em> to workplace stimuli (e.g., anxiety before audits).
+      <br>
+      • <strong>Operant conditioning</strong> → explains how <em>reward and punishment systems</em> shape employee behaviour.
+      <br>
+      • <strong>Social learning</strong> → explains how <em>culture and leadership behaviour</em> are transmitted through observation.
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<div class="footer">
+  Psychology &amp; Organisational Behaviour — Comprehensive Study Notes &nbsp;|&nbsp; Prepared for Academic Reference
+</div>
+
+</div><!-- /container -->
+</body>
+</html>
