@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concept Map: Bayesian GPR for Stock Market Crash Prediction</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f0f4f8;
+            padding: 40px 20px;
+            overflow-x: auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            color: #1a202c;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #718096;
+            font-size: 1.1em;
+        }
+        
+        .map-wrapper {
+            display: flex;
+            justify-content: center;
+            min-width: 1400px;
+        }
+        
+        .concept-map {
+            background: white;
+            padding: 60px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        /* Central Node */
+        .central-node {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px 40px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin: 0 auto 60px;
+            max-width: 500px;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+            border: 4px solid #553c9a;
+        }
+        
+        /* Branch Container */
+        .branches {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 80px 100px;
+            margin-top: 40px;
+        }
+        
+        /* Individual Branch */
+        .branch {
+            position: relative;
+        }
+        
+        .branch-title {
+            background: #2d3748;
+            color: white;
+            padding: 18px 28px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.15em;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        /* Concept Nodes */
+        .concepts {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding-left: 30px;
+            border-left: 3px solid #cbd5e0;
+        }
+        
+        .concept {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .concept::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 50%;
+            width: 30px;
+            height: 2px;
+            background: #cbd5e0;
+        }
+        
+        .concept:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+            transform: translateX(5px);
+        }
+        
+        .concept-label {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 5px;
+            font-size: 1.05em;
+        }
+        
+        .concept-detail {
+            color: #4a5568;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+        
+        /* Sub-concepts */
+        .sub-concepts {
+            margin-top: 10px;
+            padding-left: 20px;
+            border-left: 2px solid #e2e8f0;
+        }
+        
+        .sub-concept {
+            padding: 8px 12px;
+            margin: 6px 0;
+            background: #f7fafc;
+            border-left: 3px solid #667eea;
+            border-radius: 4px;
+            font-size: 0.85em;
+            color: #2d3748;
+        }
+        
+        /* Color coding for different branches */
+        .branch:nth-child(1) .branch-title {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .branch:nth-child(2) .branch-title {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .branch:nth-child(3) .branch-title {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .branch:nth-child(4) .branch-title {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        .branch:nth-child(5) .branch-title {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #2d3748;
+        }
+        
+        .branch:nth-child(6) .branch-title {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            color: #2d3748;
+        }
+        
+        /* Highlight important findings */
+        .highlight {
+            background: #fef5e7 !important;
+            border-color: #f39c12 !important;
+            font-weight: 600;
+        }
+        
+        .highlight .concept-label {
+            color: #e67e22;
+        }
+        
+        /* Connecting lines visualization */
+        .connector-lines {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 40px;
+            background: linear-gradient(to bottom, #667eea, transparent);
+        }
+        
+        /* Legend */
+        .legend {
+            margin-top: 50px;
+            padding: 25px;
+            background: #edf2f7;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .legend h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .legend-color {
+            width: 40px;
+            height: 30px;
+            border-radius: 5px;
+            flex-shrink: 0;
+        }
+        
+        .legend-text {
+            color: #4a5568;
+            font-size: 0.95em;
+        }
+        
+        @media (max-width: 1200px) {
+            .branches {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .map-wrapper {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Concept Map</h1>
+        <p>Predicting Stock Market Crash with Bayesian Generalised Pareto Regression</p>
+    </div>
+    
+    <div class="map-wrapper">
+        <div class="concept-map">
+            
+            <!-- Central Concept -->
+            <div class="central-node">
+                Bayesian GPR for Stock Market Crash Prediction
+                <div class="connector-lines"></div>
+            </div>
+            
+            <!-- Main Branches -->
+            <div class="branches">
+                
+                <!-- Branch 1: Research Problem -->
+                <div class="branch">
+                    <div class="branch-title">🎯 Research Problem</div>
+                    <div class="concepts">
+                        <div class="concept">
+                            <div class="concept-label">Extreme Market Events</div>
+                            <div class="concept-detail">Stock market crashes are rare but cause massive financial disruption and wealth erosion</div>
+                        </div>
+                        
+                        <div class="concept">
+                            <div class="concept-label">Limitation of Traditional Models</div>
+                            <div class="concept-detail">Standard GPD models assume constant parameters, ignoring current market conditions</div>
+                            <div class="sub-concepts">
+                                <div class="sub-concept">❌ No covariate integration</div>
+                                <div class="sub-concept">❌ Static risk assessment</div>
+                                <div class="sub-concept">❌ Cannot adapt to volatility regimes</div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept">
+                            <div class="concept-label">Real-World Impact</div>
+                            <div class="concept-detail">5% single-day drops trigger margin calls, forced liquidations, and market instability</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Branch 2: Methodology -->
+                <div class="branch">
+                    <div class="branch-title">🔬 Methodology</div>
+                    <div class="concepts">
+                        <div class="concept highlight">
+                            <div class="concept-label">GPD Regression (GPR)</div>
+                            <div class="concept-detail">Scale parameter as function of covariates: log(σᵢ) = Xᵢ'β</div>
+                            <div class="sub-concepts">
+                                <div class="sub-concept">✓ Shape parameter (ξ): constant across observations</div>
+                                <div class="sub-concept">✓ Scale parameter (σ): varies with market conditions</div>
+                                <div class="sub-concept">✓ Threshold (μ): 2% daily loss</div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept">
+                            <div class="concept-label">Bayesian Framework</div>
+                            <div class="concept-detail">Four prior distributions tested for regularization</div>
+                            <div class="sub-concepts">
+                                <div class="sub-concept">⭐ Cauchy: Heavy-tailed, flexible (WINNER)</div>
+                                <div class="sub-concept">Lasso: Sparsity-inducing (worst performance)</div>
+                                <div class="sub-concept">Ridge: Smooth shrinkage (moderate)</div>
+                                <div class="sub-concept">Zellner's g-prior: Data-informed (slow, 2477×)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept">
+                            <div class="concept-label">MAP Estimation</div>
+                            <div class="concept-detail">Maximum a posteriori for efficient model exploration using BFGS optimization</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Branch 3: Data & Features -->
+                <div class="branch">
+                    <div class="branch-title">📈 Data & Features</div>
+                    <div class="concepts">
+                        <div class="concept">
+                            <div class="concept-label">Dataset Characteristics</div>
+                            <div class="concept-detail">NSE Nifty 50 Index: Sept 2007 - June 2025 (17+ years)</div>
+                            <div class="sub-concepts">
+                                <div class="sub-concept">Covers 2008 financial crisis</div>
+                                <div class="sub-concept">Covers COVID-19 pandemic crash</div>
+                                <div class="sub-concept">330 extreme events (losses > 2%)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept">
+                            <div class="concept-label">Volatility Measures (Covariates)</div>
+                            <div class="concept-detail">Three sources capturing domestic and global risk</div>
+                            <div class="sub-concepts">
+                                <div class="sub-concept">🇮🇳 Nifty 50: Empirical & Garman-Klass volatility</div>
+                                <div class="sub-concept">🇺🇸 S&P 500: Global market spillover</div>
+                                <div class="sub-concept">🥇 Gold: Flight-to-safety indicator</div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept">
+                            <div class="concept-label">Volatility Calculation Methods</div>
+                            <div class="concept-detail">Two complementary approaches</div>
+                            <div class="sub-concepts">
+                                <div class="sub-concept">EWMA: σ²ₜ = α·s²ₜ₋₁ + (1-α)·r²ₜ</div>
+                                <div class="sub-concept">Garman-Klass: Uses High/Low/Open/Close prices</div>
+                                <div class="sub-concept">Correlation: 0.71 in log scale</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Branch 4: Key Results -->
+                <div class="branch">
+                    <div class="branch-title">📊 Key Results</div>
+                    <div class="concepts">
+                        <div class="concept highlight">
+                            <div class="concept-label">Model Performance (Cauchy Prior)</div>
+                            <div class="concept-detail">Best across all metrics</div>
+                            <div class="sub-concepts">
+                                <div class="sub-concept">RMSE: 1.58 (lowest)</div>
+                                <div class="sub-concept">AIC: 298.06 (lowest)</div>
+                                <div class="sub-concept">BIC: 322.20 (lowest)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept highlight">
+                            <div class="concept-label">Nonlinear Volatility-Crash Relationship</div>
+                            <div class="concept-detail">Risk increases dramatically with volatility</div>
+                            <div class="sub-concepts">
+                                <div class="sub-concept">Low volatility (10th percentile): 5% crash probability</div>
+                                <div class="sub-concept">High volatility (90th percentile): 65% crash probability</div>
+                                <div class="sub-concept">13× increase in crash risk!</div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept">
+                            <div class="concept-label">Expected Loss Predictions</div>
+                            <div class="concept-detail">Conditional on exceeding 2% threshold</div>
+                            <div class="sub-concepts">
+                                <div class="sub-concept">Low volatility: ~2.4% expected loss</div>
+                                <div class="sub-concept">High volatility: ~7%+ expected loss</div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept highlight">
+                            <div class="concept-label">Global Market Integration</div>
+                            <div class="concept-detail">International factors significantly predict Indian crashes</div>
+                            <div class="sub-concepts">
+                                <div class="sub-concept">S&P 500 volatility: Strong spillover effect</div>
+                                <div class="sub-concept">Gold volatility: Flight-to-safety signal</div>
+                                <div class="sub-concept">Markets are interconnected, not isolated</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Branch 5: Applications -->
+                <div class="branch">
+                    <div class="branch-title">💼 Practical Applications</div>
+                    <div class="concepts">
+                        <div class="concept">
+                            <div class="concept-label">Risk Management</div>
+                            <div class="concept-detail">Dynamic portfolio hedging based on volatility regimes</div>
+                        </div>
+                        
+                        <div class="concept">
+                            <div class="concept-label">Regulatory Use</div>
+                            <div class="concept-detail">Systemic risk monitoring and stress testing for financial stability</div>
+                        </div>
+                        
+                        <div class="concept">
+                            <div class="concept-label">Derivative Markets</div>
+                            <div class="concept-detail">Better pricing of tail-risk products and out-of-the-money options</div>
+                        </div>
+                        
+                        <div class="concept">
+                            <div class="concept-label">Market Infrastructure</div>
+                            <div class="concept-detail">Calibrate circuit breakers based on predicted crash probabilities</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Branch 6: Innovation & Future Work -->
+                <div class="branch">
+                    <div class="branch-title">🚀 Innovation & Future</div>
+                    <div class="concepts">
+                        <div class="concept">
+                            <div class="concept-label">Key Contributions</div>
+                            <div class="concept-detail">First GPR application with real-time volatility for Indian markets</div>
+                            <div class="sub-concepts">
+                                <div class="sub-concept">Dynamic tail risk modeling</div>
+                                <div class="sub-concept">Interpretable covariate effects</div>
+                                <div class="sub-concept">Parsimony via constant shape parameter</div>
+                            </div>
+                        </div>
+                        
+                        <div class="concept">
+                            <div class="concept-label">Advantages Over Traditional EVT</div>
+                            <div class="concept-detail">Incorporates market context unlike static models</div>
+                        </div>
+                        
+                        <div class="concept">
+                            <div class="concept-label">Future Directions</div>
+                            <div class="concept-detail">Extensions to enhance model capabilities</div>
+                            <div class="sub-concepts">
+                                <div class="sub-concept">Time-varying shape parameter</div>
+                                <div class="sub-concept">Macroeconomic indicators integration</div>
+                                <div class="sub-concept">Hierarchical Bayesian formulations</div>
+                                <div class="sub-concept">Latent volatility drivers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Legend -->
+            <div class="legend">
+                <h3>🔑 Key Takeaways</h3>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                        <div class="legend-text"><strong>Problem:</strong> Static models can't predict dynamic crashes</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                        <div class="legend-text"><strong>Solution:</strong> GPR with covariate-dependent scale</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);"></div>
+                        <div class="legend-text"><strong>Data:</strong> 17 years, 3 volatility sources</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);"></div>
+                        <div class="legend-text"><strong>Result:</strong> Crash probability: 5% → 65%</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #fef5e7; border: 2px solid #f39c12;"></div>
+                        <div class="legend-text"><strong>Highlighted:</strong> Critical findings</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script>
+        // Add interactivity
+        document.querySelectorAll('.concept').forEach(concept => {
+            concept.addEventListener('click', function() {
+                this.style.background = this.style.background === 'rgb(237, 242, 247)' ? 'white' : '#edf2f7';
+            });
+        });
+        
+        // Smooth scroll
+        document.querySelectorAll('.concept').forEach(concept => {
+            concept.addEventListener('mouseenter', function() {
+                this.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+        });
+    </script>
+</body>
+</html>
