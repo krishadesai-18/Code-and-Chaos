@@ -1,4 +1,4 @@
-# HealthIntel — Healthcare Skill Intelligence System
+# HealthIntel - Healthcare Skill Intelligence System
 
 HealthIntel is a web-based skill intelligence platform developed for **Problem Statement 3** of the Ingenious Hackathon.
 
