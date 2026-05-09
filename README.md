@@ -1,64 +1,121 @@
-# Healthcare Informatics
-Healthcare skill intelligence system
+# HealthIntel — Healthcare Skill Intelligence System
 
-Project overview & features:
-This digital platform captures, organizes, and analyzes a user's academic, project, and skill data with a focus on healthcare informatics. By identifying gaps and providing actionable insights, it acts as an evolving tool to support long-term professional development and personalized learning paths. 
---------------------------------------------------------------------
-Tech Stack:
-Frontend - HTML, CSS, Javascript
-Backend - Python
-Database - Python-based database management
---------------------------------------------------------------------
-Setup steps & How to run locally (copy-paste commands):
-python --version
-git --version
-git clone <https://github.com/krishadesai-18/Code-and-Chaos/tree/main>
-cd <HACKATHON>
+HealthIntel is a web-based skill intelligence platform developed for **Problem Statement 3** of the Ingenious Hackathon.
+
+The platform helps students and early-career professionals track skills, identify knowledge gaps, and receive personalized course recommendations related to healthcare informatics and healthcare technology careers.
+
+
+## Features
+
+- User signup and login
+- Profile and skill management
+- Career goal selection
+- Skill-gap analysis
+- Course recommendation engine
+- Dashboard visualization
+- Admin analytics
+
+
+## Tech Stack
+
+### Frontend
+- HTML
+- CSS
+- JavaScript
+
+### Backend
+- Python
+- FastAPI
+
+### Visualization
+- Chart.js
+
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/<your-username>/<repository-name>.git
+cd <repository-name>
+```
+
+### 2. Create Virtual Environment
+
+#### Windows
+
+```bash
 python -m venv venv
 venv\Scripts\activate
+```
+
+#### macOS/Linux
+
+```bash
+python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
-pip install requests python-dotenv
+```
 
-Create a file named .env in the root directory
-(use .env.example as reference)
+### 3. Install Dependencies
 
-# Coursera API Configuration
+```bash
+pip install fastapi uvicorn pydantic requests python-dotenv
+```
+
+### 4. Run Backend Server
+
+```bash
+uvicorn main:app --reload
+```
+
+Backend runs at:
+
+```bash
+http://127.0.0.1:8000
+```
+
+### 5. Run Frontend
+
+```bash
+python -m http.server 5500
+```
+
+Open in browser:
+
+```bash
+http://127.0.0.1:5500
+```
+
+
+## Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
 COURSERA_API_KEY=your_coursera_api_key_here
 COURSERA_API_URL=https://api.coursera.org/api/courses.v1
 
-# Database Configuration
 DATABASE_URL=sqlite:///database.db
 
-# Application Security
 SECRET_KEY=your_secret_key_here
 
-# Environment
 ENV=development
---------------------------------------------------------------------
-# Coursera API Configuration
-COURSERA_API_KEY=your_coursera_api_key_here
-COURSERA_API_URL=https://api.coursera.org/api/courses.v1
+```
 
-# Database Configuration
-DATABASE_URL=sqlite:///database.db
 
-# Application Security
-SECRET_KEY=your_secret_key_here
+## Demo Credentials
 
-# Environment
-ENV=development
---------------------------------------------------------------------
-Test login credentials (if needed)
-Users can register using any email and password
-No real email verification is implemented
---------------------------------------------------------------------
-Basic error handling:
-Invalid username or password
-If the account is already created and the user tries to sign in it will ask them to log in
---------------------------------------------------------------------
-Confirmation of no secrets in the repo:
-We acknowledge the use of the Coursera API as an external learning resource to enable course recommendations aligned with identified skill gaps.
-We also acknowledge the use of Visual Studio Code with GitHub Copilot as a development support tool for code suggestions and productivity enhancement during implementation.
+```text
+Email: demo@healthcare.com
+Password: demo
+```
 
-All system design, logic formulation, feature integration, and final implementation decisions were independently carried out by the team.
+
+## Future Improvements
+
+- Database integration
+- JWT authentication
+- Password hashing
+- AI-powered recommendations
+- Real API integrations
+- Deployment support
